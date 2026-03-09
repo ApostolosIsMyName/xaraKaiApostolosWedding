@@ -533,6 +533,214 @@
             padding-top: 16px;
         }
 
+        /* ── GALLERY CAROUSEL ── */
+        #gallery {
+            background: white;
+        }
+
+        .carousel-wrap {
+            position: relative;
+            margin-top: 8px;
+            user-select: none;
+        }
+
+        /* main stage */
+        .carousel-stage {
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            background: var(--ivory);
+            aspect-ratio: 16/9;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.55s ease;
+            pointer-events: none;
+        }
+
+            .carousel-slide.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .carousel-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+                border-radius: 3px;
+            }
+
+            /* placeholder slide */
+            .carousel-slide.placeholder {
+                flex-direction: column;
+                gap: 12px;
+                border: 1px dashed rgba(201,169,110,0.35);
+                border-radius: 3px;
+            }
+
+                .carousel-slide.placeholder .ph-icon {
+                    font-size: 2rem;
+                    opacity: 0.35;
+                }
+
+                .carousel-slide.placeholder .ph-label {
+                    font-size: 0.65rem;
+                    letter-spacing: 0.22em;
+                    text-transform: uppercase;
+                    color: var(--muted);
+                    opacity: 0.5;
+                }
+
+        /* prev / next buttons */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(250,246,240,0.88);
+            border: 1px solid rgba(201,169,110,0.25);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            line-height: 1;
+            backdrop-filter: blur(4px);
+        }
+
+            .carousel-btn:hover {
+                background: var(--gold);
+                color: white;
+                border-color: var(--gold);
+            }
+
+        .carousel-prev {
+            left: 16px;
+        }
+
+        .carousel-next {
+            right: 16px;
+        }
+
+        /* dot indicators */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--blush-deep);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            opacity: 0.4;
+            transition: opacity 0.3s, transform 0.3s, background 0.3s;
+        }
+
+            .carousel-dot.active {
+                opacity: 1;
+                background: var(--gold);
+                transform: scale(1.35);
+            }
+
+        /* counter */
+        .carousel-counter {
+            text-align: center;
+            margin-top: 12px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+        }
+
+        /* thumbnail strip */
+        .carousel-thumbs {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+
+            .carousel-thumbs::-webkit-scrollbar {
+                display: none;
+            }
+
+        .carousel-thumb {
+            flex-shrink: 0;
+            width: 72px;
+            height: 52px;
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.25s, opacity 0.25s;
+            opacity: 0.55;
+            background: var(--ivory);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .carousel-thumb img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            .carousel-thumb.ph-thumb {
+                border: 1px dashed rgba(201,169,110,0.35);
+                font-size: 1rem;
+                opacity: 0.4;
+            }
+
+            .carousel-thumb.active {
+                border-color: var(--gold);
+                opacity: 1;
+            }
+
+        @media (max-width: 680px) {
+            .carousel-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+            }
+
+            .carousel-prev {
+                left: 8px;
+            }
+
+            .carousel-next {
+                right: 8px;
+            }
+
+            .carousel-thumb {
+                width: 56px;
+                height: 40px;
+            }
+        }
+
         /* ── FOOTER ── */
         footer {
             background: var(--charcoal);
@@ -617,7 +825,8 @@
             <li><a href="#schedule">Πρόγραμμα</a></li>
             <li><a href="#travel">Ταξίδι</a></li>
             <li><a href="#registry">Δώρα</a></li>
-            <li><a href="#faq">Επικοινωνια</a></li>
+            <li><a href="#faq">Eπικοινωνία</a></li>
+            <li><a href="#gallery">Φωτογραφίες</a></li>
         </ul>
     </nav>
 
@@ -801,14 +1010,14 @@
                 <div class="registry-item copy-iban" data-iban="GR1601401200120002340024738">
                     <div class="registry-name">Ζαχαρούλα Γεωργίου</div>
                     <div class="registry-sub">6943873676</div>
-                    <div class="registry-sub">GR1601401200120002340024738</div><br />
+                    <div class="registry-sub">GR1601401200120002340024738</div>
                     <div class="registry-hint">Πάτησε για αντιγραφή IBAN</div>
                 </div>
 
                 <div class="registry-item copy-iban" data-iban="GR0801401060106002340007826">
                     <div class="registry-name">Απόστολος Σκοτεινιώτης</div>
                     <div class="registry-sub">6951741092</div>
-                    <div class="registry-sub">GR0801401060106002340007826</div><br />
+                    <div class="registry-sub">GR0801401060106002340007826</div>
                     <div class="registry-hint">Πάτησε για αντιγραφή IBAN</div>
                 </div>
 
@@ -829,6 +1038,91 @@
         </div>
     </section>
 
+    <!-- GALLERY -->
+    <section id="gallery">
+        <div class="section-inner reveal">
+            <p class="section-tag">Φωτογραφίες</p>
+            <h2 class="section-title">Οι <em>στιγμές μας</em></h2>
+
+            <div class="carousel-wrap">
+
+                <!-- ── Main stage ── -->
+                <div class="carousel-stage" id="carousel-stage">
+
+                    <!-- Replace placeholder slides with real ones like this:
+         <div class="carousel-slide">
+             <img src="./your-photo.jpg" alt="Χαρά και Απόστολος">
+         </div>
+    -->
+
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./1.jpg" alt="Χαρά και Απόστολος 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./2.jpg" alt="Χαρά και Απόστολος 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./3.jpg" alt="Χαρά και Απόστολος 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./4.jpg" alt="Χαρά και Απόστολος 4">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./5.jpg" alt="Χαρά και Απόστολος 5">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./6.jpg" alt="Χαρά και Απόστολος 6">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./7.jpg" alt="Χαρά και Απόστολος 7">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./8.jpg" alt="Χαρά και Απόστολος 8">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./9.jpg" alt="Χαρά και Απόστολος 9">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./10.jpg" alt="Χαρά και Απόστολος 10">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./11.jpg" alt="Χαρά και Απόστολος 11">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./12.jpg" alt="Χαρά και Απόστολος 12">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./13.jpg" alt="Χαρά και Απόστολος 13">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./14.jpg" alt="Χαρά και Απόστολος 14">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./15.jpg" alt="Χαρά και Απόστολος 15">
+                    </div>
+                    <div class="carousel-slide">
+                        <img object-fit: cover src="./16.jpg" alt="Χαρά και Απόστολος 16">
+                    </div>
+
+                </div>
+
+                <button class="carousel-btn carousel-prev" id="car-prev" aria-label="Προηγούμενο">‹</button>
+                <button class="carousel-btn carousel-next" id="car-next" aria-label="Επόμενο">›</button>
+
+            </div>
+
+            <!-- Dot indicators -->
+            <div class="carousel-dots" id="carousel-dots"></div>
+
+            <!-- Counter -->
+            <div class="carousel-counter" id="carousel-counter"></div>
+
+            <!-- Thumbnail strip -->
+            <div class="carousel-thumbs" id="carousel-thumbs"></div>
+
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer>
         <div class="footer-names">Χαρά & Απόστολος</div>
@@ -836,7 +1130,8 @@
     </footer>
 
     <!-- SCRIPTS — placed at end of body so DOM is ready -->
-    <script>// ── Countdown ──
+    <script>
+        // ── Countdown ──
         function updateCountdown() {
             const wedding = new Date('2026-09-05T18:30:00');
             const now = new Date();
@@ -866,7 +1161,7 @@
         }, { threshold: 0.1 });
         reveals.forEach(el => observer.observe(el));
 
-        // ── IBAN copy ──
+        // ── IBAN copy (FIX: moved here so DOM is ready) ──
         document.querySelectorAll('.copy-iban').forEach(item => {
             item.addEventListener('click', () => {
                 const iban = item.dataset.iban;
@@ -895,6 +1190,84 @@
             q.addEventListener('click', () => {
                 q.parentElement.classList.toggle('open');
             });
-        });</script>
+        });
+
+        // ── Gallery carousel ──
+        (function () {
+            const stage   = document.getElementById('carousel-stage');
+            const dotsEl  = document.getElementById('carousel-dots');
+            const thumbsEl= document.getElementById('carousel-thumbs');
+            const counter = document.getElementById('carousel-counter');
+            const slides  = Array.from(stage.querySelectorAll('.carousel-slide'));
+            let current = 0, autoTimer = null;
+
+            // Build dots and thumbnails
+            slides.forEach((slide, i) => {
+                // dot
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Φωτογραφία ' + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsEl.appendChild(dot);
+
+                // thumbnail
+                const thumb = document.createElement('div');
+                thumb.className = 'carousel-thumb' + (i === 0 ? ' active' : '');
+                const img = slide.querySelector('img');
+                if (img) {
+                    const t = document.createElement('img');
+                    t.src = img.src;
+                    t.alt = img.alt || '';
+                    thumb.appendChild(t);
+                } else {
+                    thumb.classList.add('ph-thumb');
+                    thumb.textContent = '📷';
+                }
+                thumb.addEventListener('click', () => goTo(i));
+                thumbsEl.appendChild(thumb);
+            });
+
+            function updateUI() {
+                slides.forEach((s, i) => s.classList.toggle('active', i === current));
+                dotsEl.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+                thumbsEl.querySelectorAll('.carousel-thumb').forEach((t, i) => t.classList.toggle('active', i === current));
+                counter.textContent = (current + 1) + ' / ' + slides.length;
+                // scroll active thumb into view
+                const activeThumb = thumbsEl.querySelectorAll('.carousel-thumb')[current];
+   
+            }
+
+            function goTo(index) {
+                current = (index + slides.length) % slides.length;
+                updateUI();
+                resetAuto();
+            }
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(() => goTo(current + 1), 5000);
+            }
+
+            document.getElementById('car-prev').addEventListener('click', () => goTo(current - 1));
+            document.getElementById('car-next').addEventListener('click', () => goTo(current + 1));
+
+            // swipe support
+            let touchStartX = 0;
+            stage.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+            stage.addEventListener('touchend', e => {
+                const dx = e.changedTouches[0].clientX - touchStartX;
+                if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+            });
+
+            // keyboard
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowLeft')  goTo(current - 1);
+                if (e.key === 'ArrowRight') goTo(current + 1);
+            });
+
+            updateUI();
+            resetAuto();
+        })();
+    </script>
 </body>
 </html>
