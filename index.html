@@ -604,6 +604,14 @@
             margin-top: 6px;
             letter-spacing: 0.1em;
         }
+        .registry-item {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+            .registry-item:hover {
+                transform: translateY(-3px);
+            }
 
         /* ── FAQ ── */
         #faq {
@@ -735,6 +743,23 @@
             }
         }
     </style>
+    <script>
+        document.querySelectorAll(".copy-iban").forEach(item => {
+    item.addEventListener("click", () => {
+        const iban = item.dataset.iban;
+        const label = item.querySelector(".registry-sub:last-child");
+        if (!iban || !label) return;
+
+        navigator.clipboard.writeText(iban).then(() => {
+            const original = label.innerText;
+            label.innerText = "IBAN copied ✓";
+            setTimeout(() => { label.innerText = original; }, 2000);
+        }).catch(() => {
+            label.innerText = "Copy failed ✗";
+        });
+    });
+});
+    </script>
 </head>
 <body>
 
@@ -746,7 +771,6 @@
             <li><a href="#schedule">Προγραμμα</a></li>
             <li><a href="#travel">Ταξιδι</a></li>
             <li><a href="#registry">Δωρα και ευχες</a></li>
-            <li><a href="#faq">FAQ</a></li>
         </ul>
     </nav>
 
@@ -836,21 +860,6 @@
                     </div>
                 </div>
 
-                <!--<div class="timeline-item">
-                  <div class="timeline-time">
-                    <div class="timeline-time-main">4:30</div>
-                    <div class="timeline-time-ampm">PM</div>
-                  </div>
-                  <div class="timeline-connector">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-line"></div>
-                  </div>
-                  <div class="timeline-content">
-                    <div class="timeline-event-name">Cocktail Hour</div>
-                    <div class="timeline-event-detail">Terrace & Lawn · Canapés & drinks</div>
-                  </div>
-                </div>-->
-
                 <div class="timeline-item">
                     <div class="timeline-time">
                         <div class="timeline-time-main">18:30</div>
@@ -884,71 +893,6 @@
         </div>
     </section>
 
-    <!-- RSVP -->
-    <!--<section id="rsvp">
-      <div class="section-inner reveal">
-        <p class="section-tag">You're invited</p>
-        <h2 class="section-title">Kindly <em>reply</em></h2>
-        <div class="rsvp-card">
-          <div class="form-row">
-            <div class="form-group">
-              <label>First Name</label>
-              <input type="text" placeholder="Your first name">
-            </div>
-            <div class="form-group">
-              <label>Last Name</label>
-              <input type="text" placeholder="Your last name">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" placeholder="your@email.com">
-            </div>
-            <div class="form-group">
-              <label>Number of Guests</label>
-              <select>
-                <option value="">Select…</option>
-                <option>1 — Just me</option>
-                <option>2 — Me + 1</option>
-                <option>3</option>
-                <option>4</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group form-full">
-              <label>Will you be attending?</label>
-              <div class="radio-group">
-                <label class="radio-label"><input type="radio" name="attending" value="yes"> Joyfully accepts</label>
-                <label class="radio-label"><input type="radio" name="attending" value="no"> Regretfully declines</label>
-              </div>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group form-full">
-              <label>Dietary Requirements</label>
-              <select>
-                <option value="">None / No restrictions</option>
-                <option>Vegetarian</option>
-                <option>Vegan</option>
-                <option>Gluten-free</option>
-                <option>Nut allergy</option>
-                <option>Other (please note below)</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group form-full">
-              <label>A note for us (optional)</label>
-              <textarea placeholder="Any notes, song requests, or words of love…"></textarea>
-            </div>
-          </div>
-          <button class="rsvp-btn" onclick="handleRSVP()">Send my reply</button>
-          <p class="rsvp-note">Please RSVP by August 1st, 2025.</p>
-        </div>
-      </div>
-    </section>-->
     <!-- TRAVEL -->
     <section id="travel">
         <div class="section-inner reveal">
@@ -1010,18 +954,21 @@
                 Η παρουσία σας θα είναι το μεγαλύτερο δώρο. Εάν θέλετε να προσφέρετε κάτι για να στηρίξετε το νέο μας ξεκίνημα, μπορείτε να στείλετε χρήματα μέσω IRIS και IBAN στους λογαριασμούς μας. Ευχαριστούμε για την αγάπη και την υποστήριξή σας!
             </p>
             <div class="registry-grid">
-                <div class="registry-item" href="#" target="_blank">
-                    <div class="registry-icon">💶</div>
+
+                <div class="registry-item copy-iban"
+                     data-iban="GR1601401200120002340024738">
                     <div class="registry-name">Ζαχαρούλα Γεωργίου</div>
                     <div class="registry-sub">6943873676</div>
-                    <div class="registry-sub">GR0801401060106002340007826</div>
+                    <div class="registry-sub">GR1601401200120002340024738</div>
                 </div>
-                <div class="registry-item" href="#" target="_blank">
-                    <div class="registry-icon">💶</div>
+
+                <div class="registry-item copy-iban"
+                     data-iban="GR0801401060106002340007826">
                     <div class="registry-name">Απόστολος Σκοτεινιώτης</div>
                     <div class="registry-sub">6951741092</div>
                     <div class="registry-sub">GR0801401060106002340007826</div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -1033,37 +980,6 @@
             <h2 class="section-title">Πληροφορίες <em></em></h2>
             <div>Για οποιαδήποτε απορία ή πληροφορία μπορείτε να επικοινωνήσετε μαζί μας στα τηλέφωνα, 6943873676 (Χαρά) και 6951741092 (Απόστολος) ή μέσω μηνύματος σε Instagram, Messenger, Viber.</div>
             <div class="faq-list">
-
-                <!--<div class="faq-item">
-                  <div class="faq-q" onclick="toggleFAQ(this)">What is the dress code?</div>
-                  <div class="faq-a">The dress code is formal / black tie optional. We'd love for you to dress up with us! Think floor-length gowns, cocktail dresses, suits, or tuxedos. We'll be outdoors for the ceremony, so keep that in mind for footwear — a block heel or wedge is your best friend on the lawn.</div>
-                </div>
-
-                <div class="faq-item">
-                  <div class="faq-q" onclick="toggleFAQ(this)">Can I bring children?</div>
-                  <div class="faq-a">Our wedding is an adult-only celebration (18+). We hope this gives you a chance for a lovely night out. We completely understand if this affects your ability to attend and kindly ask you to indicate this when you RSVP.</div>
-                </div>
-
-                <div class="faq-item">
-                  <div class="faq-q" onclick="toggleFAQ(this)">Can I take photos during the ceremony?</div>
-                  <div class="faq-a">Sure! Please scan the QR Code on your tables and upload your best shots! </div>
-                </div>
-
-                <div class="faq-item">
-                  <div class="faq-q" onclick="toggleFAQ(this)">Is the venue wheelchair accessible?</div>
-                  <div class="faq-a">Yes! Rosewood Estate is fully accessible. Please let us know in your RSVP if you have any specific accessibility needs and we'll make sure everything is arranged for you.</div>
-                </div>
-
-                <div class="faq-item">
-                  <div class="faq-q" onclick="toggleFAQ(this)">Will there be a vegetarian / vegan meal option?</div>
-                  <div class="faq-a">Absolutely!</div>
-                </div>-->
-
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFAQ(this)">Who should I contact with questions?</div>
-                    <div class="faq-a">Please email the bride at <strong>xaroulageorgiou@yahoo.gr</strong> or the groom at <strong>scottie771@gmail.com</strong>! We'll do our best to respond within a few days!</div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -1103,19 +1019,6 @@
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
   }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-
-  // FAQ
-  function toggleFAQ(el) {
-    const item = el.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-
-  // RSVP
-  function handleRSVP() {
-    alert("Thank you for your RSVP! We're so excited to celebrate with you. 💕");
-  }</script>
+  reveals.forEach(el => observer.observe(el));</script>
 </body>
 </html>
