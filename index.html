@@ -790,6 +790,165 @@
                 transform: none;
             }
 
+        /* ── UPLOAD ── */
+        #upload {
+            background: var(--charcoal);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+            #upload::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(ellipse 60% 50% at 15% 20%, rgba(242,212,208,0.08) 0%, transparent 65%), radial-gradient(ellipse 45% 55% at 85% 80%, rgba(168,181,160,0.1) 0%, transparent 60%);
+                pointer-events: none;
+            }
+
+            #upload .section-tag {
+                color: rgba(201,169,110,0.7);
+            }
+
+            #upload .section-title {
+                color: rgba(250,246,240,0.92);
+            }
+
+                #upload .section-title em {
+                    color: var(--blush-deep);
+                }
+
+        .upload-intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: rgba(242,212,208,0.6);
+            max-width: 520px;
+            margin: 0 auto 52px;
+            line-height: 1.75;
+        }
+
+        .upload-cta-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .upload-btn-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: transparent;
+            border: 1px solid rgba(201,169,110,0.55);
+            color: var(--gold);
+            font-family: 'Jost', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 20px 44px;
+            border-radius: 1px;
+            transition: background 0.35s, color 0.35s, border-color 0.35s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .upload-btn-main::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: var(--gold);
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.35s ease;
+                z-index: 0;
+            }
+
+            .upload-btn-main:hover::before {
+                transform: scaleX(1);
+            }
+
+            .upload-btn-main:hover {
+                color: var(--charcoal);
+                border-color: var(--gold);
+            }
+
+            .upload-btn-main span,
+            .upload-btn-main .upload-icon {
+                position: relative;
+                z-index: 1;
+            }
+
+        .upload-icon {
+            font-size: 1.2rem;
+            opacity: 0.85;
+        }
+
+        .upload-features {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .upload-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            color: rgba(242,212,208,0.38);
+            text-transform: uppercase;
+        }
+
+            .upload-feature::before {
+                content: '✦';
+                color: rgba(201,169,110,0.35);
+                font-size: 0.55rem;
+            }
+
+        .upload-divider {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 260px;
+            margin: 0 auto;
+        }
+
+            .upload-divider::before,
+            .upload-divider::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: rgba(201,169,110,0.18);
+            }
+
+            .upload-divider span {
+                font-size: 0.6rem;
+                letter-spacing: 0.2em;
+                color: rgba(201,169,110,0.35);
+                text-transform: uppercase;
+            }
+
+        .upload-album-link {
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(242,212,208,0.4);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(242,212,208,0.15);
+            padding-bottom: 2px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+            .upload-album-link:hover {
+                color: rgba(242,212,208,0.75);
+                border-color: rgba(242,212,208,0.4);
+            }
+
         /* ── MOBILE ── */
         @media (max-width: 680px) {
             nav {
@@ -827,6 +986,7 @@
             <li><a href="#registry">Δώρα</a></li>
             <li><a href="#faq">Eπικοινωνία</a></li>
             <li><a href="#gallery">Φωτογραφίες</a></li>
+            <li><a href="#upload">Μοιραστείτε</a></li>
         </ul>
     </nav>
 
@@ -1050,10 +1210,10 @@
                 <div class="carousel-stage" id="carousel-stage">
 
                     <!-- Replace placeholder slides with real ones like this:
-         <div class="carousel-slide">
-             <img src="./your-photo.jpg" alt="Χαρά και Απόστολος">
-         </div>
-    -->
+                         <div class="carousel-slide">
+                             <img src="./your-photo.jpg" alt="Χαρά και Απόστολος">
+                         </div>
+                    -->
 
                     <div class="carousel-slide">
                         <img object-fit: cover src="./1.jpg" alt="Χαρά και Απόστολος 1">
@@ -1123,6 +1283,33 @@
         </div>
     </section>
 
+    <!-- UPLOAD -->
+    <section id="upload">
+        <div class="section-inner reveal">
+            <p class="section-tag">Μοιραστείτε μαζί μας</p>
+            <h2 class="section-title">Οι <em>δικές σας</em> στιγμές</h2>
+            <p class="upload-intro">
+                Κάθε φωτογραφία και βίντεο που τραβήξατε είναι κομμάτι της ιστορίας μας. Μοιραστείτε τις στιγμές σας μαζί μας!
+            </p>
+            <div class="upload-cta-wrap">
+                <a href="https://app.kolaz.gr/upload/hjafgdonme" target="_blank" class="upload-btn-main">
+                    <span class="upload-icon">📷</span>
+                    <span>Ανεβάστε φωτογραφίες & βίντεο</span>
+                </a>
+                <div class="upload-features">
+                    <div class="upload-feature">Φωτογραφίες</div>
+                    <div class="upload-feature">Βίντεο</div>
+                    <div class="upload-feature">Ηχητικά μηνύματα</div>
+                    <div class="upload-feature">Κείμενο</div>
+                </div>
+                <div class="upload-divider"><span>ή</span></div>
+                <a href="https://app.kolaz.gr/d/hjafgdonme" target="_blank" class="upload-album-link">
+                    Δείτε το κοινό album →
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer>
         <div class="footer-names">Χαρά & Απόστολος</div>
@@ -1137,7 +1324,7 @@
             const now = new Date();
             const diff = wedding - now;
             if (diff <= 0) {
-                ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => {
+                ['cd-days', 'cd-hours', 'cd-mins', 'cd-secs'].forEach(id => {
                     document.getElementById(id).textContent = '0';
                 });
                 return;
@@ -1147,9 +1334,9 @@
             const m = Math.floor((diff % 3600000) / 60000);
             const s = Math.floor((diff % 60000) / 1000);
             document.getElementById('cd-days').textContent = d;
-            document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-            document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
-            document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+            document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
         }
         updateCountdown();
         setInterval(updateCountdown, 1000);
@@ -1166,7 +1353,7 @@
             item.addEventListener('click', () => {
                 const iban = item.dataset.iban;
                 const label = item.querySelector('.registry-sub:last-of-type');
-                const hint  = item.querySelector('.registry-hint');
+                const hint = item.querySelector('.registry-hint');
                 if (!iban) return;
 
                 navigator.clipboard.writeText(iban).then(() => {
@@ -1194,11 +1381,11 @@
 
         // ── Gallery carousel ──
         (function () {
-            const stage   = document.getElementById('carousel-stage');
-            const dotsEl  = document.getElementById('carousel-dots');
-            const thumbsEl= document.getElementById('carousel-thumbs');
+            const stage = document.getElementById('carousel-stage');
+            const dotsEl = document.getElementById('carousel-dots');
+            const thumbsEl = document.getElementById('carousel-thumbs');
             const counter = document.getElementById('carousel-counter');
-            const slides  = Array.from(stage.querySelectorAll('.carousel-slide'));
+            const slides = Array.from(stage.querySelectorAll('.carousel-slide'));
             let current = 0, autoTimer = null;
 
             // Build dots and thumbnails
@@ -1234,7 +1421,7 @@
                 counter.textContent = (current + 1) + ' / ' + slides.length;
                 // scroll active thumb into view
                 const activeThumb = thumbsEl.querySelectorAll('.carousel-thumb')[current];
-   
+
             }
 
             function goTo(index) {
@@ -1261,7 +1448,7 @@
 
             // keyboard
             document.addEventListener('keydown', e => {
-                if (e.key === 'ArrowLeft')  goTo(current - 1);
+                if (e.key === 'ArrowLeft') goTo(current - 1);
                 if (e.key === 'ArrowRight') goTo(current + 1);
             });
 
