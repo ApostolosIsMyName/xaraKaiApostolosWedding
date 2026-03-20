@@ -949,6 +949,124 @@
                 border-color: rgba(242,212,208,0.4);
             }
 
+        /* ── BURGER ── */
+        .nav-burger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 36px;
+            height: 36px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 200;
+        }
+
+            .nav-burger span {
+                display: block;
+                height: 1px;
+                background: var(--charcoal);
+                border-radius: 1px;
+                transition: transform 0.35s ease, opacity 0.25s ease, width 0.3s ease;
+                transform-origin: center;
+            }
+
+                .nav-burger span:nth-child(1) {
+                    width: 22px;
+                }
+
+                .nav-burger span:nth-child(2) {
+                    width: 28px;
+                }
+
+                .nav-burger span:nth-child(3) {
+                    width: 18px;
+                }
+
+            .nav-burger.open span:nth-child(1) {
+                width: 24px;
+                transform: translateY(6px) rotate(45deg);
+            }
+
+            .nav-burger.open span:nth-child(2) {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+
+            .nav-burger.open span:nth-child(3) {
+                width: 24px;
+                transform: translateY(-6px) rotate(-45deg);
+            }
+
+        /* mobile drawer */
+        .nav-drawer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 150;
+            background: rgba(250,246,240,0.97);
+            backdrop-filter: blur(12px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            opacity: 0;
+            transform: translateY(-12px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            pointer-events: none;
+        }
+
+            .nav-drawer.open {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+        .nav-drawer-monogram {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            margin-bottom: 40px;
+        }
+
+        .nav-drawer ul {
+            list-style: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+            .nav-drawer ul li a {
+                font-size: 0.68rem;
+                letter-spacing: 0.3em;
+                text-transform: uppercase;
+                text-decoration: none;
+                color: var(--muted);
+                display: block;
+                padding: 12px 20px;
+                transition: color 0.25s;
+            }
+
+                .nav-drawer ul li a:hover,
+                .nav-drawer ul li a:active {
+                    color: var(--gold);
+                }
+
+        .nav-drawer-divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(201,169,110,0.25);
+            margin: 28px auto 0;
+        }
+
         /* ── MOBILE ── */
         @media (max-width: 680px) {
             nav {
@@ -957,6 +1075,10 @@
 
             .nav-links {
                 display: none;
+            }
+
+            .nav-burger {
+                display: flex;
             }
 
             .story-grid, .travel-grid {
@@ -988,7 +1110,27 @@
             <li><a href="#gallery">Φωτογραφίες</a></li>
             <li><a href="#upload">Μοιραστείτε</a></li>
         </ul>
+        <button class="nav-burger" id="nav-burger" aria-label="Μενού" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
+
+    <!-- MOBILE DRAWER -->
+    <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+        <div class="nav-drawer-monogram">Χ & Α</div>
+        <ul>
+            <li><a href="#story" class="drawer-link">Η Ιστορία μας</a></li>
+            <li><a href="#schedule" class="drawer-link">Πρόγραμμα</a></li>
+            <li><a href="#travel" class="drawer-link">Ταξίδι</a></li>
+            <li><a href="#registry" class="drawer-link">Δώρα</a></li>
+            <li><a href="#faq" class="drawer-link">Επικοινωνία</a></li>
+            <li><a href="#gallery" class="drawer-link">Φωτογραφίες</a></li>
+            <li><a href="#upload" class="drawer-link">Μοιραστείτε</a></li>
+        </ul>
+        <div class="nav-drawer-divider"></div>
+    </div>
 
     <!-- HERO -->
     <section class="hero" id="home">
@@ -1208,12 +1350,6 @@
 
                 <!-- ── Main stage ── -->
                 <div class="carousel-stage" id="carousel-stage">
-
-                    <!-- Replace placeholder slides with real ones like this:
-                         <div class="carousel-slide">
-                             <img src="./your-photo.jpg" alt="Χαρά και Απόστολος">
-                         </div>
-                    -->
 
                     <div class="carousel-slide">
                         <img object-fit: cover src="./1.jpg" alt="Χαρά και Απόστολος 1">
@@ -1454,6 +1590,51 @@
 
             updateUI();
             resetAuto();
+        })();
+
+        // ── Burger menu ──
+        (function () {
+            const burger = document.getElementById('nav-burger');
+            const drawer = document.getElementById('nav-drawer');
+
+            function openDrawer() {
+                drawer.style.display = 'flex';
+                requestAnimationFrame(() => {
+                    drawer.classList.add('open');
+                    burger.classList.add('open');
+                    burger.setAttribute('aria-expanded', 'true');
+                    drawer.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            function closeDrawer() {
+                drawer.classList.remove('open');
+                burger.classList.remove('open');
+                burger.setAttribute('aria-expanded', 'false');
+                drawer.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                setTimeout(() => { drawer.style.display = 'none'; }, 350);
+            }
+
+            burger.addEventListener('click', () => {
+                burger.classList.contains('open') ? closeDrawer() : openDrawer();
+            });
+
+            // Close on link click
+            document.querySelectorAll('.drawer-link').forEach(link => {
+                link.addEventListener('click', closeDrawer);
+            });
+
+            // Close on backdrop tap (outside the ul)
+            drawer.addEventListener('click', e => {
+                if (e.target === drawer) closeDrawer();
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+            });
         })();
     </script>
 </body>
